@@ -148,7 +148,9 @@ dl.l.google.com = server:119.29.29.29
 # Advertising = select,REJECT,DIRECT
 # 白名单模式 PROXY，黑名单模式 DIRECT
 # Final = select,PROXY,DIRECT
-
+DomesticFinal = select,DIRECT,PROXY
+Global = select,PROXY,DIRECT
+AdBlock = select,REJECT,DIRECT
 
 
 
