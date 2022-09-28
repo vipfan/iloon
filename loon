@@ -57,9 +57,8 @@ dl.l.google.com = server:119.29.29.29
 
 # >机场订阅
 [Remote Proxy]
-
 # >格式：机场别名 = 机场订阅地址
-
+# XX云 = https://XXX.XXX
 
 # >策略组
 [Proxy Group]
@@ -68,24 +67,22 @@ dl.l.google.com = server:119.29.29.29
 
 # >筛选订阅节点
 [Remote Filter]
-
 # >通过关键字方式筛选
-🇭🇰 比特云-香港 = NameKeyword,比特云, FilterKey = "香港"
+# 🇭🇰 XX云-香港 = NameKeyword,比特云, FilterKey = "香港"
 
 # >通过正则方式筛选
-🇭🇰 香港节点 = NameRegex,比特云, FilterKey = "(?i)(港|HK|Hong)"
-🇨🇳 台湾节点 = NameRegex, 比特云, FilterKey = "(?i)(台|TW|Tai)"
-🇯🇵 日本节点 = NameRegex,比特云, FilterKey = "(?i)(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan)"
-🇰🇷 韩国节点 = NameRegex,比特云, FilterKey = "(?i)(KR|Korea|KOR|首尔|韩|韓)"
-🇺🇲 美国节点 = NameRegex, 比特云,FilterKey = "(?i)(美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States)"
-🇸🇬 狮城节点 = NameRegex,比特云, FilterKey = "(?i)(新加坡|坡|狮城|SG|Singapore)"
+# 🇭🇰 香港节点 = NameRegex,XX云, FilterKey = "(?i)(港|HK|Hong)"
+# 🇨🇳 台湾节点 = NameRegex, XX云, FilterKey = "(?i)(台|TW|Tai)"
+# 🇯🇵 日本节点 = NameRegex,XX云, FilterKey = "(?i)(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan)"
+# 🇰🇷 韩国节点 = NameRegex,XX云, FilterKey = "(?i)(KR|Korea|KOR|首尔|韩|韓)"
+# 🇺🇲 美国节点 = NameRegex, XX云,FilterKey = "(?i)(美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States)"
+# 🇸🇬 狮城节点 = NameRegex,XX云, FilterKey = "(?i)(新加坡|坡|狮城|SG|Singapore)"
 
 
 # >本地分流规则
 [Rule]
-domain-suffix, music.126.net, 🎯 全球直连
-GEOIP,CN,🎯 全球直连
-FINAL,🐟 漏网之鱼
+GEOIP,CN,DIRECT
+FINAL,PROXY
 
 
 # >分流规则 远程订阅
