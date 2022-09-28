@@ -1,0 +1,118 @@
+# >通用设置
+[General]
+
+allow-udp-proxy=false
+bypass-tun=10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.18.0.0/15,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
+dns-server=system,119.29.29.29,223.5.5.5,114.114.114.114
+host=127.0.0.1
+skip-proxy=127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10, localhost, *.local, *.crashlytics.com, *.edu.cn, captive.apple.com
+ipv6 = false
+allow-wifi-access = false
+wifi-access-http-port = 7222
+wifi-access-socket5-port = 7221
+proxy-test-url = http://www.gstatic.com/generate_204
+test-timeout = 3
+
+# >手动添加的节点
+[Proxy]
+
+
+
+# >机场订阅
+[Remote Proxy]
+
+# >格式：机场别名 = 机场订阅地址
+比特云 = https://subscribe.bityun.org/api/v1/client/subscribe?token=yourtoken
+
+# >策略组
+[Proxy Group]
+
+📳 Wifi无忧切换 = ssid,default = 🚀 节点选择, cellular = 🚀 节点选择, "FHY_5G" = DIRECT
+🚀 节点选择 = select,♻️ 自动选择,👋 手动切换,🔮 负载均衡,DIRECT
+👋 手动切换 = select,DIRECT,比特云
+♻️ 自动选择 = url-test,🇭🇰 比特云-香港,url=http://www.gstatic.com/generate_204, interval=300, tolerance = 100
+🔮 负载均衡 = load-balance,🇭🇰 比特云-香港,url = http://www.gstatic.com/generate_204, interval = 300,max-timeout = 2000,algorithm = pcc
+📲 电报消息 = select,🚀 节点选择,♻️ 自动选择,🚀 手动切换,🇭🇰 比特云-香港,DIRECT
+📹 YouTube = select,🚀 节点选择,♻️ 自动选择,🚀 手动切换,🇭🇰 比特云-香港,DIRECT
+🎥 Netflix = select,🚀 节点选择,♻️ 自动选择,🚀 手动切换,🇭🇰 比特云-香港,DIRECT
+🍎 苹果服务 = select,DIRECT,🚀 节点选择,♻️ 自动选择,🚀 手动切换
+🎶 网易音乐 = select,DIRECT,解锁网易云灰色音乐,🚀 节点选择,♻️ 自动选择
+🎯 全球直连 = select,DIRECT,🚀 节点选择,♻️ 自动选择
+🛑 全球拦截 = select,REJECT,DIRECT
+🐟 漏网之鱼 = select,🚀 节点选择,👋 手动切换,🎯 全球直连,♻️ 自动选择,🔮 负载均衡
+
+# >筛选订阅节点
+[Remote Filter]
+
+# >通过关键字方式筛选
+🇭🇰 比特云-香港 = NameKeyword,比特云, FilterKey = "香港"
+
+# >通过正则方式筛选
+🇭🇰 香港节点 = NameRegex,比特云, FilterKey = "(?i)(港|HK|Hong)"
+🇨🇳 台湾节点 = NameRegex, 比特云, FilterKey = "(?i)(台|TW|Tai)"
+🇯🇵 日本节点 = NameRegex,比特云, FilterKey = "(?i)(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan)"
+🇰🇷 韩国节点 = NameRegex,比特云, FilterKey = "(?i)(KR|Korea|KOR|首尔|韩|韓)"
+🇺🇲 美国节点 = NameRegex, 比特云,FilterKey = "(?i)(美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States)"
+🇸🇬 狮城节点 = NameRegex,比特云, FilterKey = "(?i)(新加坡|坡|狮城|SG|Singapore)"
+
+
+# >本地分流规则
+[Rule]
+domain-suffix, music.126.net, 🎯 全球直连
+GEOIP,CN,🎯 全球直连
+FINAL,🐟 漏网之鱼
+
+
+# >分流规则 远程订阅
+[Remote Rule]
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list, policy=🎯 全球直连, tag=本地网络-直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list, policy=🎯 全球直连, tag=去广告白名单-直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list, policy=🛑 全球拦截, tag=常见关键字去广告-拦截, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list, policy=🛑 全球拦截, tag=常见应用内去广告-拦截, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list, policy=🎯 全球直连, tag=谷歌国内业务-直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list, policy=🍎 苹果服务, tag=苹果服务-直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list, policy=📲 电报消息, tag=电报分流-代理, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list, policy=🎶 网易音乐, tag=网易云音乐-直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list, policy=📹 YouTube, tag=YouTube分流, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list, policy=🎥 Netflix, tag=Netflix分流, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list, policy=📳 Wifi无忧切换, tag=国外媒体-代理, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list, policy=📳 Wifi无忧切换, tag=国外域名等规则(轻量级)-代理, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list, policy=🎯 全球直连, tag=国内域名-直连, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list, policy=🎯 全球直连, tag=国内云服务商IP段-直连, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Download/Download.list, policy=🎯 全球直连, tag=BT下载规则-直连, enabled=true
+
+
+# >本地URL复写
+[URL Rewrite]
+
+enable=true
+
+# >远程URL复写订阅
+[Remote Rewrite]
+
+
+# >本地脚本
+[Script]
+
+enable = true
+
+
+# >远程脚本订阅
+[Remote Script]
+
+
+# >插件(类似Surge的模块)
+[Plugin]
+
+https://raw.githubusercontent.com/Tartarus2014/Loon-Script/master/Plugin/Block/Advertising.plugin, tag=重写去广告, enabled=false
+https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.tf.plugin, tag=BoxJS_TF版, enabled=false
+https://raw.githubusercontent.com/Peng-YM/Sub-Store/master/config/Loon.plugin, tag=Sub-Store订阅, enabled=false
+
+[MITM]
+ca-p12 = 
+ca-passphrase = 
+enable = true
+hostname = *.example.com,*.sample.com
+skip-server-cert-verify = false
+
+Pricing
