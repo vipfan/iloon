@@ -101,18 +101,21 @@ trojan2 = trojan,example.com,443,"password",skip-cert-verify=true,tls-name=examp
 
 # >机场订阅
 [Remote Proxy]
-# >格式：机场别名 = 机场订阅地址
-# XX云 = https://XXX.XXX
+# 订阅节点
+# 别名 = 订阅URL
+# Subs = https://example/server-complete.txt
+# Subs2 = https://example2/server-complete.txt
 
-# >策略组
-[Proxy Group]
-
-
-
-# >筛选订阅节点
 [Remote Filter]
+# 筛选订阅节点，筛选后的结果可加入到策略组中，目前支持三种筛选方式
+# NodeSelect: 使用在UI上选择的节点。
+# NameKeyword: 根据提供的关键词对订阅中所有节点的名称进行筛选，使用筛选后的节点。
+# NameRegex: 根据提供的正则表达式对订阅中所有节点的名称进行筛选，使用筛选后的节点。
 # >通过关键字方式筛选
 # 🇭🇰 XX云-香港 = NameKeyword,比特云, FilterKey = "香港"
+# Netflix = NodeSelect,Subs
+# Hulu = NameKeyword,Subs,Subs2,FilterKey = Hulu
+# HK = NameRegex,Subs,FilterKey = *HK
 
 # >通过正则方式筛选
 # 🇭🇰 香港节点 = NameRegex,XX云, FilterKey = "(?i)(港|HK|Hong)"
@@ -121,6 +124,21 @@ trojan2 = trojan,example.com,443,"password",skip-cert-verify=true,tls-name=examp
 # 🇰🇷 韩国节点 = NameRegex,XX云, FilterKey = "(?i)(KR|Korea|KOR|首尔|韩|韓)"
 # 🇺🇲 美国节点 = NameRegex, XX云,FilterKey = "(?i)(美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States)"
 # 🇸🇬 狮城节点 = NameRegex,XX云, FilterKey = "(?i)(新加坡|坡|狮城|SG|Singapore)"
+
+
+
+
+
+
+
+
+
+# >策略组
+[Proxy Group]
+
+
+
+
 
 
 # >本地分流规则
