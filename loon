@@ -197,6 +197,14 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/
 # Advertising 广告
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/AdvertisingLite/AdvertisingLite.list, tag=去广告白名单-拦截, policy=AdBlock, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/AdvertisingLite/AdvertisingLite_Domain.list, tag=去广告白名单-拦截, policy=AdBlock, enabled=true
+# 去隐私追踪-拦截
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Privacy/Privacy.list, tag=去隐私追踪-拦截, policy=AdBlock, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Privacy/Privacy_Domain.list, tag=去隐私追踪-拦截, policy=AdBlock, enabled=true
+# 反劫持-拦截
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Hijacking/Hijacking.list, tag=反劫持-拦截, policy=AdBlock, enabled=true
+
+
+
 
 
 
