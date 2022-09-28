@@ -190,28 +190,46 @@ https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.li
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Download/Download.list, policy=🎯 全球直连, tag=BT下载规则-直连, enabled=true
 
 
-# >本地URL复写
-[URL Rewrite]
 
-enable=true
 
-# >远程URL复写订阅
+
+# >本地复写
+[Rewrite]
+# Redirect Google Search Service
+^https?:\/\/(www.)?(g|google)\.cn https://www.google.com 302
+
+
+# >远程复写
 [Remote Rewrite]
-
+# 订阅 URL Rewrite
+# 订阅url,别名(可选)
+https://raw.githubusercontent.com/Loon0x00/LoonExampleConfig/master/Rewrite/AutoRewrite_Example.list,tag=auto,enable=true
 
 # >本地脚本
 [Script]
+# http-request 处理请求的脚本
+# http-response 处理请求响应的脚本
+# cron 定时脚本
+# network-changed   网络发生变化触发脚本
+# generic  通用型脚本，可用在操作节点/策略组中，执行是会带入节点名称和策略组名称，脚本必须在开启NE时
 
-enable = true
+# http-request ^https?:\/\/(www.)?(example)\.com script-path=localscript.js,tag = requestScript,enable=true
+# http-response ^https?:\/\/(www.)?(example)\.com script-path=https://example.com/loon.js,timeout=10,requires-body = true,tag = responseScript,enable=true
+# cron "0 8 * * *" script-path=cron.js,tag = responseScript,enable=true
+
+network-changed script-path=https://raw.githubusercontent.com/Loon0x00/LoonExampleConfig/master/Script/netChanged.js, tag=changeModel,enable=true
+
+generic script-path=https://raw.githubusercontent.com/Loon0x00/LoonExampleConfig/master/Script/generic_example.js,tag=GeoLocation,timeout=10,img-url=location.fill.viewfinder.system
 
 
 # >远程脚本订阅
 [Remote Script]
-
+# https://example.com/loon.js, tag=scripts, enable=true
 
 # >插件(类似Surge的模块)
 [Plugin]
-
+# plugin-url tag=tag,proxy=插件中PROXY所指向的策略,enable=true
+# plugin策略可设置为DIRECT,REJECT,PROXY，其中PROXY为用户在app中手动映射的策略，rule后不跟随策略默认使用PROXY
 https://raw.githubusercontent.com/Tartarus2014/Loon-Script/master/Plugin/Block/Advertising.plugin, tag=重写去广告, enabled=false
 https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.tf.plugin, tag=BoxJS_TF版, enabled=false
 https://raw.githubusercontent.com/Peng-YM/Sub-Store/master/config/Loon.plugin, tag=Sub-Store订阅, enabled=false
