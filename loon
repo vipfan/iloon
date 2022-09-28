@@ -161,9 +161,9 @@ dl.l.google.com = server:119.29.29.29
 # Strategy:DIRECT,Proxy,REJECT
 # Options:no-resolve(no-resolve(only for cidr))
 # DOMAIN,google.com,PROXY
-# GeoIP China
-# GEOIP,CN,DIRECT
-# FINAL,Final
+
+GEOIP,CN,DIRECT
+FINAL,Final
 
 
 # >分流规则 远程订阅
