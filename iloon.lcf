@@ -1,30 +1,54 @@
 # >通用设置
 [General]
-sni-sniffing = true
-dns-server = system, 119.29.29.29, 114.114.114.114
-doh-server = https://doh.pub/dns-query, https://1.12.12.12/dns-query, https://120.53.53.53/dns-query
-disable-udp-ports = 443
-disable-stun = false
-dns-reject-mode = LoopbackIP
-domain-reject-mode = DNS
+# IPv6 支持
+ip-mode = dual
+ipv6-vif = auto
+# UDP相关
+disable-stun = true
 udp-fallback-mode = REJECT
+# SNI辅助规则匹配
+sni-sniffing = true
+# 策略组切换时关闭连接
+disconnect-on-policy-change = true
+# 域名拦截行为
+domain-reject-mode = DNS
+dns-reject-mode = LoopbackIP
+# > 跳过代理
+# 跳过某个域名或者 IP 段，这些目标主机将不会由 Loon Proxy 处理。
 skip-proxy = localhost,*.local,passenger.t3go.cn,e.crashlytics.com,captive.apple.com,app.yinxiang.com,injections.adguard.org,local.adguard.org,cable.auth.com,www.baidu.com,yunbusiness.ccb.com,10.0.0.0/8,100.64.0.0/10,127.0.0.1/32,169.254.0.0/16,172.16.0.0/12,192.168.0.0/16,224.0.0.0/4,240.0.0.0/4,::1/128,fc00::/7,fd00::/8,fe80::/10,ff00::/8,2001::/32,2001:db8::/32,2002::/16,::ffff:0:0:0:0/1,::ffff:128:0:0:0/1
-bypass-tun=10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.18.0.0/15,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
-ipv6 = false
+# > Always Real IP Hosts
+# DNS 数据包将被转发到上游 DNS 服务器。
+real-ip = *.apple.com,*apple.com
+# 绕过路由
+bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
+# DNS 服务器
+dns-server = system
+# doh-server = https://doh.pub/dns-query, https://1.12.12.12/dns-query, https://120.53.53.53/dns-query
+# Hijack DNS
+# 默认情况下，Loon 只返回发送到 Loon DNS 地址的 DNS 查询的假 IP 地址(198.18.0.2)。
+# 有些设备或软件总是使用硬编码的 DNS 服务器。 (例如 Google Speakers 总是使用 8.8.8.8)。 您可以使用此选项劫持查询，以获得一个假地址。
+hijack-dns = 8.8.8.8:53,8.8.4.4:53
+# Wi-Fi 访问
 allow-wifi-access = false
-allow-udp-proxy = true
-wifi-access-http-port = 7222
-wifi-access-socket5-port = 7221
+wifi-access-http-port = 1234
+wifi-access-socks5-port = 1235
+mitm-on-wifi-access = false
+# 代理测速 URL
+internet-test-url = http://connectivitycheck.platform.hicloud.com/generate_204
 proxy-test-url = http://www.gstatic.com/generate_204
+# 测速超时 (s)
 test-timeout = 5
+# 网络接口
 interface-mode = auto
-disconnect-on-policy-change = false
-switch-node-after-failure-times = 3
-# 解决一些ip请求无法匹配域名类规则的问题。real-ip指定的域名将不返回fake ip响应，直接将dns请求发往目标dns服务器
-real-ip = *.lan, cable.auth.com, *.msftconnecttest.com, *.msftncsi.com, network-test.debian.org, detectportal.firefox.com, resolver1.opendns.com, *.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com, stun.*, localhost.*.qq.com, *.logon.battlenet.com.cn, *.logon.battle.net, *.blzstatic.cn, *.cmpassport.com, id6.me, open.e.189.cn, mdn.open.wo.cn, auth.wosms.cn, *.jegotrip.com.cn, *.icitymobile.mobi, *.pingan.com.cn, *.cmbchina.com, *?miwifi.com, pool.ntp.org, *.pool.ntp.org, ntp.*.com, time.*.com, ntp?.*.com, time?.*.com, time.*.gov, time.*.edu.cn, *.ntp.org.cn, time.*.apple.com, PDC._msDCS.*.*, DC._msDCS.*.*, GC._msDCS.*.*
+# ssid-trigger参数，用于指定SSID下流量模式切换，（default表示默认，cellular表示蜂窝，目前支持三种值：rule，direct，proxy） 
+# ssid-trigger = "default":rule, "cellular":rule,"ASUS_5G":direct
+# 解析器
 resource-parser = https://raw.githubusercontent.com/sub-store-org/Sub-Store/release/sub-store-parser.loon.min.js
+# 解决一些ip请求无法匹配域名类规则的问题。real-ip指定的域名将不返回fake ip响应，直接将dns请求发往目标dns服务器
+# real-ip = *.lan, cable.auth.com, *.msftconnecttest.com, *.msftncsi.com, network-test.debian.org, detectportal.firefox.com, resolver1.opendns.com, *.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com, stun.*, localhost.*.qq.com, *.logon.battlenet.com.cn, *.logon.battle.net, *.blzstatic.cn, *.cmpassport.com, id6.me, open.e.189.cn, mdn.open.wo.cn, auth.wosms.cn, *.jegotrip.com.cn, *.icitymobile.mobi, *.pingan.com.cn, *.cmbchina.com, *?miwifi.com, pool.ntp.org, *.pool.ntp.org, ntp.*.com, time.*.com, ntp?.*.com, time?.*.com, time.*.gov, time.*.edu.cn, *.ntp.org.cn, time.*.apple.com, PDC._msDCS.*.*, DC._msDCS.*.*, GC._msDCS.*.*
+
 geoip-url = https://github.com/Hackl0us/GeoIP2-CN/raw/release/Country.mmdb
-ipasn-url=https://raw.githubusercontent.com/P3TERX/GeoLite.mmdb/download/GeoLite2-ASN.mmdb
+ipasn-url = https://raw.githubusercontent.com/P3TERX/GeoLite.mmdb/download/GeoLite2-ASN.mmdb
 
 [Host]
 # > 可以指定一下四种模式：
